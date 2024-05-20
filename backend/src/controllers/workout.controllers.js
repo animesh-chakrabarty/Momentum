@@ -86,5 +86,5 @@ module.exports = {
   getWorkouts,
   getWorkout,
   deleteWorkout,
-  updateWorkout
+  updateWorkout,
 };

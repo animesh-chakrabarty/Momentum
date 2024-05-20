@@ -2,12 +2,12 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
 // importing pages and components
-import HomePage from "../pages/HomePage";
-import NavBar from "../components/NavBar";
+import HomePage from "./pages/HomePage";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
-    <div className=" bg-red-200 h-screen p-10 px-10">
+    <div className="h-screen p-10 px-10 bg-red-200 ">
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
