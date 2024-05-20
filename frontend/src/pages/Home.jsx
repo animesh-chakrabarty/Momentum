@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import WorkoutCard from "../components/WorkoutCard";
 import WorkoutForm from "../components/WorkoutForm";
 
-const HomePage = () => {
+const Home = () => {
   const [workouts, setWorkouts] = useState(null);
-  const [triggerRerender, setTriggerRerender] = useState(0);
+  const [triggerRefetch, setTriggerRefetch] = useState(0);
 
-  const handleTriggerRerender = () => {
-    setTriggerRerender((prev) => prev + 1);
+  const handleTriggerRefetch = () => {
+    setTriggerRefetch((prev) => prev + 1);
   };
 
   useEffect(() => {
@@ -22,19 +22,34 @@ const HomePage = () => {
     };
 
     fetchWorkouts();
-  }, [triggerRerender]);
+  }, [triggerRefetch]);
+
+  const deleteWorkout = async (id) => {
+    const res = await fetch("http://localhost:4000/api/workouts/" + id, {
+      method: "DELETE",
+    });
+    const res_json = await res.json();
+
+    if (res.ok) {
+      handleTriggerRefetch();
+    }
+  };
 
   return (
     <div className="flex">
       <div className="flex flex-col gap-4">
         {workouts &&
           workouts.map((workout) => (
-            <WorkoutCard key={workout._id} workout={workout} />
+            <WorkoutCard
+              key={workout._id}
+              workout={workout}
+              deleteWorkout={deleteWorkout}
+            />
           ))}
       </div>
-      <WorkoutForm triggerRerender={handleTriggerRerender} />
+      <WorkoutForm triggerRefetch={handleTriggerRefetch} />
     </div>
   );
 };
 
-export default HomePage;
+export default Home;

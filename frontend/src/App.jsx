@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
 // importing pages and components
-import HomePage from "./pages/HomePage";
+import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <div className="h-screen p-10 px-10 bg-red-200 ">
       <NavBar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </div>
   );

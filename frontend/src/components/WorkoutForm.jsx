@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const WorkoutForm = ({ triggerRerender }) => {
+const WorkoutForm = ({ triggerRefetch }) => {
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState("");
@@ -40,7 +40,7 @@ const WorkoutForm = ({ triggerRerender }) => {
       resetForm();
       setError(null);
       console.log(res_json);
-      triggerRerender();
+      triggerRefetch();
     }
   };
 
