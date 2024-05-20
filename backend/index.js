@@ -2,13 +2,18 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const workoutRoutes = require("./routes/workouts");
+const cors = require("cors");
 
 const PORT = process.env.PORT;
-
+const corsOptions = {
+  origin: "http://localhost:5173",
+};
 // creating express app
 const app = express();
 
-// setting up middleware
+// setting up middlewares
+app.use(cors(corsOptions));
+// used cors package to resolve CORS policy error
 app.use(express.json());
 // express.json() middleware checks if any JSON data is present in the req body or not. If it has, express.json() parses the data and makes it available in req.body object
 app.use((req, res, next) => {
