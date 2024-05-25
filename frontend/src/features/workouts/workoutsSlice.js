@@ -9,7 +9,7 @@ export const workoutsSlice = createSlice({
   initialState,
   reducers: {
     // add workouts to state on reload
-    addWorkouts: (state, action) => {
+    setWorkouts: (state, action) => {
       state.workouts = action.payload;
       console.log(action.payload);
     },
@@ -26,6 +26,6 @@ export const workoutsSlice = createSlice({
   },
 });
 
-export const { addWorkouts, addWorkout, removeWorkout } = workoutsSlice.actions;
+export const { setWorkouts, addWorkout, removeWorkout } = workoutsSlice.actions;
 
 export default workoutsSlice.reducer;

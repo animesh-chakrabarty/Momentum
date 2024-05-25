@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 // importing components
 import WorkoutCard from "../components/WorkoutCard";
 import WorkoutForm from "../components/WorkoutForm";
-import { addWorkouts, removeWorkout } from "../features/workouts/workoutsSlice";
+import { setWorkouts, removeWorkout } from "../features/workouts/workoutsSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const Home = () => {
       // console.log(res_json);
 
       if (res.ok) {
-        dispatch(addWorkouts(res_json));
+        dispatch(setWorkouts(res_json));
       }
     };
 
