@@ -18,9 +18,9 @@ const Signup = () => {
   // one the API call is made to the /api/user/ endpoint the we'll get the response in the response variable destructured from useAuth() hook. So whenever the response variable changes this useEffect will execute the inside code block and update the user credentials stored in client state and client localStorage
   useEffect(() => {
     // set credentials to client state
-    dispatch(setUserCredential(response));
+    response && dispatch(setUserCredential(response));
     // set credentials to localStorage
-    localStorage.setItem("momentum-user-credentials", JSON.stringify(response));
+    response && localStorage.setItem("momentum-user-credentials", JSON.stringify(response));
   }, [response]);
 
   return (

@@ -3,7 +3,7 @@ import { useState } from "react";
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [response, setResponse] = useState({});
+  const [response, setResponse] = useState();
 
   //   making API call
   const fetchAuth = async (url, email, password) => {
@@ -26,11 +26,6 @@ export const useAuth = () => {
 
     if (res.ok) {
       setResponse(res_json);
-      // save the user & token to localStorage
-      // localStorage.setItem(
-      //   "momentum-user-credentials",
-      //   JSON.stringify(res_json)
-      // );
       // update loading state
       setIsLoading(false);
     }
