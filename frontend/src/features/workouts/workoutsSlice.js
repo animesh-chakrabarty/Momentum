@@ -11,7 +11,6 @@ export const workoutsSlice = createSlice({
     // add workouts to state on reload
     setWorkouts: (state, action) => {
       state.workouts = action.payload;
-      console.log(action.payload);
     },
     // add new workout to state
     addWorkout: (state, action) => {

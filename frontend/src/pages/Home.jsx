@@ -7,13 +7,12 @@ import { setWorkouts, removeWorkout } from "../features/workouts/workoutsSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const workouts = useSelector((state) => state.workouts);
+  const workouts = useSelector((state) => state.workouts.workouts);
 
   useEffect(() => {
     const fetchWorkouts = async () => {
       const res = await fetch("http://localhost:4000/api/workouts");
       const res_json = await res.json();
-      // console.log(res_json);
 
       if (res.ok) {
         dispatch(setWorkouts(res_json));
@@ -22,8 +21,6 @@ const Home = () => {
 
     fetchWorkouts();
   }, []);
-
-  console.log(workouts);
 
   const deleteWorkout = async (id) => {
     const res = await fetch("http://localhost:4000/api/workouts/" + id, {
@@ -41,7 +38,7 @@ const Home = () => {
     <div className="flex">
       <div className="flex flex-col gap-4">
         {workouts &&
-          workouts.map((workout) => (
+          workouts?.map((workout) => (
             <WorkoutCard
               key={workout._id}
               workout={workout}

@@ -46,7 +46,6 @@ const WorkoutForm = () => {
     }
   };
 
-  console.log("workout form re-rendered");
   return (
     <form
       className="flex flex-col justify-between bg-green-200 "
