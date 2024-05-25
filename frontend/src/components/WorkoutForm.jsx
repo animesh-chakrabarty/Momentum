@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addWorkout } from "../features/workouts/workoutsSlice";
 
 const WorkoutForm = () => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState("");
@@ -39,9 +42,11 @@ const WorkoutForm = () => {
       resetForm();
       setError(null);
       console.log(res_json);
+      dispatch(addWorkout(res_json));
     }
   };
 
+  console.log("workout form re-rendered");
   return (
     <form
       className="flex flex-col justify-between bg-green-200 "
@@ -61,7 +66,6 @@ const WorkoutForm = () => {
       <div className="flex justify-between">
         <label> load</label>
         <input
-          type="number"
           placeholder="add load.. "
           value={load}
           onChange={(e) => setLoad(e.target.value)}
@@ -71,7 +75,7 @@ const WorkoutForm = () => {
       <div className="flex justify-between">
         <label> reps </label>
         <input
-          type="number"
+          placeholder="add repetations..."
           value={reps}
           onChange={(e) => setReps(e.target.value)}
         />

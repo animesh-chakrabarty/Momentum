@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// importing components
 import WorkoutCard from "../components/WorkoutCard";
 import WorkoutForm from "../components/WorkoutForm";
+import { addWorkouts, removeWorkout } from "../features/workouts/workoutsSlice";
 
 const Home = () => {
-  const [workouts, setWorkouts] = useState(null);
+  const dispatch = useDispatch();
+  const workouts = useSelector((state) => state.workouts);
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -12,12 +16,14 @@ const Home = () => {
       // console.log(res_json);
 
       if (res.ok) {
-        setWorkouts(res_json);
+        dispatch(addWorkouts(res_json));
       }
     };
 
     fetchWorkouts();
   }, []);
+
+  console.log(workouts);
 
   const deleteWorkout = async (id) => {
     const res = await fetch("http://localhost:4000/api/workouts/" + id, {
@@ -27,6 +33,7 @@ const Home = () => {
 
     if (res.ok) {
       console.log(res_json);
+      dispatch(removeWorkout(id));
     }
   };
 
@@ -42,7 +49,7 @@ const Home = () => {
             />
           ))}
       </div>
-      <WorkoutForm/>
+      <WorkoutForm />
     </div>
   );
 };
