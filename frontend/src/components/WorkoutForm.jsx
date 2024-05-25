@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
-const WorkoutForm = ({ triggerRefetch }) => {
+const WorkoutForm = () => {
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState("");
   const [error, setError] = useState("");
 
-  console.log("component reenderer");
   //   workout data to send with req body
   const workout = { title, load, reps };
   //   obj to send with POST req containing workout data
@@ -40,7 +39,6 @@ const WorkoutForm = ({ triggerRefetch }) => {
       resetForm();
       setError(null);
       console.log(res_json);
-      triggerRefetch();
     }
   };
 

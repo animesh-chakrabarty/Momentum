@@ -4,11 +4,6 @@ import WorkoutForm from "../components/WorkoutForm";
 
 const Home = () => {
   const [workouts, setWorkouts] = useState(null);
-  const [triggerRefetch, setTriggerRefetch] = useState(0);
-
-  const handleTriggerRefetch = () => {
-    setTriggerRefetch((prev) => prev + 1);
-  };
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -22,7 +17,7 @@ const Home = () => {
     };
 
     fetchWorkouts();
-  }, [triggerRefetch]);
+  }, []);
 
   const deleteWorkout = async (id) => {
     const res = await fetch("http://localhost:4000/api/workouts/" + id, {
@@ -31,7 +26,7 @@ const Home = () => {
     const res_json = await res.json();
 
     if (res.ok) {
-      handleTriggerRefetch();
+      console.log(res_json);
     }
   };
 
@@ -47,7 +42,7 @@ const Home = () => {
             />
           ))}
       </div>
-      <WorkoutForm triggerRefetch={handleTriggerRefetch} />
+      <WorkoutForm/>
     </div>
   );
 };
