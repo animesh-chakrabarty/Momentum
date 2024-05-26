@@ -4,10 +4,11 @@ const workout = require("../models/workout.models");
 // POST on "/" - post a new workout
 const createWorkout = async (req, res) => {
   const { title, reps, load } = req.body;
-
+  const id = req.user._id;
+  // console.log();
   try {
     // creating a doc in workouts collection
-    const workout_doc = await workout.create({ title, load, reps });
+    const workout_doc = await workout.create({ title, load, reps, id });
     res.status(200).json(workout_doc);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -16,8 +17,9 @@ const createWorkout = async (req, res) => {
 
 // GET on "/" - get all workouts
 const getWorkouts = async (req, res) => {
+  const id = req.user._id;
   // getting all the workouts from db and sorting them by time of creation
-  const workouts = await workout.find({}).sort({ createdAt: -1 });
+  const workouts = await workout.find({ id }).sort({ createdAt: -1 });
   res.status(200).json(workouts);
 };
 

@@ -8,10 +8,20 @@ import { setWorkouts, removeWorkout } from "../features/workouts/workoutsSlice";
 const Home = () => {
   const dispatch = useDispatch();
   const workouts = useSelector((state) => state.workouts.workouts);
+  const userCredentials = useSelector((state) => state.auth.userCredentials);
+
+  console.log(userCredentials);
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const res = await fetch("http://localhost:4000/api/workouts");
+      if (!userCredentials) {
+        return;
+      }
+      const res = await fetch("http://localhost:4000/api/workouts", {
+        headers: {
+          Authorization: `Bearer ${userCredentials?.token}`,
+        },
+      });
       const res_json = await res.json();
 
       if (res.ok) {
@@ -20,11 +30,17 @@ const Home = () => {
     };
 
     fetchWorkouts();
-  }, []);
+  }, [userCredentials]);
 
   const deleteWorkout = async (id) => {
+    if (!userCredentials) {
+      return;
+    }
     const res = await fetch("http://localhost:4000/api/workouts/" + id, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${userCredentials.token}`,
+      },
     });
     const res_json = await res.json();
 

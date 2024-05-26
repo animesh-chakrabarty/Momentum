@@ -22,9 +22,13 @@ export const workoutsSlice = createSlice({
         (workout) => workout._id !== action.payload
       );
     },
+    clearWorkouts: (state, action) => {
+      state.workouts = [];
+    },
   },
 });
 
-export const { setWorkouts, addWorkout, removeWorkout } = workoutsSlice.actions;
+export const { setWorkouts, addWorkout, removeWorkout, clearWorkouts } =
+  workoutsSlice.actions;
 
 export default workoutsSlice.reducer;

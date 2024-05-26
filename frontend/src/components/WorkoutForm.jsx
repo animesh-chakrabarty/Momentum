@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addWorkout } from "../features/workouts/workoutsSlice";
 
 const WorkoutForm = () => {
   const dispatch = useDispatch();
+  const userCredentials = useSelector((state) => state.auth.userCredentials);
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState("");
@@ -17,6 +18,7 @@ const WorkoutForm = () => {
     body: JSON.stringify(workout),
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${userCredentials?.token}`,
     },
   };
 
@@ -30,6 +32,11 @@ const WorkoutForm = () => {
   //   add new workout to db
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!userCredentials) {
+      setError("You need to be logged in");
+      return;
+    }
 
     const res = await fetch("http://localhost:4000/api/workouts", POST_obj);
     const res_json = await res.json();

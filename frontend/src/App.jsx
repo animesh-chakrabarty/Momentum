@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // importing pages and components
 import Home from "./pages/Home";
@@ -8,15 +8,19 @@ import Login from "./pages/Login";
 
 import NavBar from "./components/NavBar";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserCredential } from "./features/auth/authSlice";
 
 function App() {
   const dispatch = useDispatch();
+  const userCredentials = useSelector((state) => state.auth.userCredentials);
+  console.log(userCredentials);
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("momentum-user-credentials"));
     user && dispatch(setUserCredential(user));
   }, []);
+
   return (
     <div className="h-screen p-10 px-10 bg-red-200 ">
       <NavBar />

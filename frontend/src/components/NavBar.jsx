@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useSelector } from "react-redux";
@@ -14,7 +14,7 @@ const NavBar = () => {
       <h1>Momentum</h1>
       {user ? (
         <div className="flex justify-end gap-10">
-          <h1>{user?.user?.email}</h1>
+          <h1>{user?.email}</h1>
           <button onClick={handleLogout} className="px-4 py-2 bg-blue-400">
             logout
           </button>
