@@ -45,7 +45,7 @@ const Login = () => {
       {!isLoading ? <button>login</button> : <h1>Loading...</h1>}
       {error && <p>{error}</p>}
     </form>
-  );
+  ); 
 };
 
 export default Login;
